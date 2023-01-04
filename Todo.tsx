@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, SafeAreaView, Image, TouchableOpacity,Text, View, TextInput , AppRegistry, ActivityIndicator } from "react-native";
+import { StyleSheet, SafeAreaView, Image, TouchableOpacity,Text, View, TextInput , AppRegistry, ActivityIndicator, ScrollView } from "react-native";
 import AppLoading from "expo-app-loading/build/AppLoading";
 import {
   useFonts,
@@ -89,8 +89,8 @@ const numberDate = String(date.getDate()).padStart(2, '0')
 //
 
   const IconButton = ({onPress, icon, isLoading }) => (
-    <TouchableOpacity style={{ backgroundColor: "#009b80", width: 70, borderRadius: 4,alignItems: 'center', }}  onPress={onPress}>
-      {!isLoading ? icon : <ActivityIndicator color="#fff" size={32} style={{ bottom: 8}}  /> }
+    <TouchableOpacity style={{ backgroundColor: "#009b80", width: "23%", borderRadius: 4,alignItems: 'center', }}  onPress={onPress}>
+      {!isLoading ? icon : <ActivityIndicator color="#fff" size={36} style={{ top: "5%"}}  /> }
     </TouchableOpacity>
   );
   const IconButtonAction = ({ icon, onPress, width }) => (
@@ -128,7 +128,7 @@ const numberDate = String(date.getDate()).padStart(2, '0')
     {
         id: index,
         isCompleted: completed 
-    }, refetchQueries: [{ query: GET_TODOS}]})
+    }})
   };
   //
   
@@ -161,19 +161,19 @@ const numberDate = String(date.getDate()).padStart(2, '0')
                 </View>
             
             <View style={styles.inputWrapper}>
-            <TextInput
-                placeholder="Entre vos taches..."
-                placeholderTextColor="#727272"
-                value={value}
-                onChangeText={e => {
-                  setValue(e);
-                  showError(false);
-                }}
-                style={
-                  [styles.inputBox, { borderColor: isError ? "#DC3545" : "#727272"}]
-                }
-            />
-           <IconButton isLoading={addData.loading} onPress={handleSubmit} icon={<Ionicons name="md-add" size={36} color="#fff" style={{ bottom: 6}} />} />
+                <TextInput
+                    placeholder="Entre vos taches..."
+                    placeholderTextColor="#727272"
+                    value={value}
+                    onChangeText={e => {
+                      setValue(e);
+                      showError(false);
+                    }}
+                    style={
+                      [styles.inputBox, { borderColor: isError ? "#DC3545" : "#727272"}]
+                    }
+                />
+              <IconButton isLoading={addData.loading} onPress={handleSubmit} icon={<Ionicons name="md-add" size={36} color="#fff" style={{ top: "5%"}} />} />
             
             </View>
             {isError && (
@@ -188,32 +188,35 @@ const numberDate = String(date.getDate()).padStart(2, '0')
                     <Text style={styles.emptyText}> Vous n'avez pas de taches pour l'instant, ajoutez en une </Text>
                 </View>
                 }
-            {data.todos.map((toDo: IToDo) => (
-            <View style={styles.listItem} key={toDo.id}>
-                {
-                toDo.isCompleted ? <IconButtonAction width={24}  icon={<Feather name="check-circle" size={20} color="#009b80" style={{ bottom: 6}}  />} onPress= {() => toggleComplete(toDo.id, false)}  /> : 
-                <IconButtonAction width={24} icon={<Feather name="circle" size={20} color="#727272" style={{ bottom: 6}} />} onPress={() => toggleComplete(toDo.id, true)} />
-                }
-                
-                <Text
-                    style={[
-                    styles.task,
-                    { textDecorationLine: toDo.isCompleted ? "line-through" : "none" },
-                    { opacity: toDo.isCompleted ? 0.5 : 1}
-                    ]}
-                >
-                    {toDo.text}
-                </Text>
+                <ScrollView style={{ }}>
+                      {data.todos.map((toDo: IToDo) => (
+                      <View style={styles.listItem} key={toDo.id}>
+                          {
+                          toDo.isCompleted ? <IconButtonAction width={24}  icon={<Feather name="check-circle" size={20} color="#009b80" style={{ top: "20%"}}  />} onPress= {() => toggleComplete(toDo.id, false)}  /> : 
+                          <IconButtonAction width={24} icon={<Feather name="circle" size={20} color="#727272" style={{ top: "20%"}} />} onPress={() => toggleComplete(toDo.id, true)} />
+                          }
+                          
+                          <Text
+                              style={[
+                              styles.task,
+                              { textDecorationLine: toDo.isCompleted ? "line-through" : "none" },
+                              { opacity: toDo.isCompleted ? 0.5 : 1}
+                              ]}
+                          >
+                              {toDo.text}
+                          </Text>
 
-                <IconButtonAction
-                    width={20}
-                    onPress={() => {
-                        removeItem(toDo.id);
-                    }}
-                    icon={<AntDesign name="delete" size={24} color="#DC3545" style={{ top: 6}} />}
-                />
-            </View>
-            ))}
+                          <IconButtonAction
+                              width={"10%"}
+                              onPress={() => {
+                                  removeItem(toDo.id);
+                              }}
+                              icon={<AntDesign name="delete" size={24} color="#DC3545" style={{ top: "20%"}} />}
+                          />
+                      </View>
+                      ))}
+                </ScrollView>
+            
             </View>
         </SafeAreaView>
         
@@ -243,7 +246,7 @@ const styles = StyleSheet.create({
     
   },
   inputBox: {
-    width: 260,
+    width: "75%",
     borderRadius: 4,
     color: "#fff", 
     fontFamily: 'Poppins_500Medium',
@@ -290,7 +293,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#242439",
     borderRadius: 2,
-    padding: 5,
+    padding: 7,
     flexDirection: "row",
     width: "100%",
     marginBottom: 10,

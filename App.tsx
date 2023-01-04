@@ -3,7 +3,7 @@ import Todo from "./Todo";
 import { ApolloProvider, ApolloClient, InMemoryCache,  } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://9fc6-154-72-169-155.eu.ngrok.io/api/graphql",
+  uri: "https://e4e5-154-72-171-237.eu.ngrok.io/api/graphql",
   cache: new InMemoryCache()
 })
 
